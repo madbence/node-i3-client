@@ -13,6 +13,7 @@ Client.prototype.getSocketPath = function getSocketPath(cb) {
     if(err) {
       return cb(err);
     }
+    this.socketPath = out.toString().trim();
     return cb(null, this.socketPath);
   });
 };
