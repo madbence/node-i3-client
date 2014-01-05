@@ -41,5 +41,11 @@ describe('Client', function() {
         should.exist(err);
       });
     });
+    it('should parse exec output', function() {
+      execFile = function(a, b, c) { c(null, ' abc   \n'); };
+      client.getSocketPath(function(err, path) {
+        path.should.equal('abc');
+      });
+    });
   });
 });
