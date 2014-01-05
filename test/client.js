@@ -35,5 +35,11 @@ describe('Client', function() {
       };
       client.getSocketPath(function() {});
     });
+    it('should fail if execFile fails', function() {
+      execFile = function(a, b, c) { c({}); };
+      client.getSocketPath(function(err) {
+        should.exist(err);
+      });
+    });
   });
 });
