@@ -9,12 +9,16 @@ function Client(opts) {
 }
 
 Client.prototype.getSocketPath = function getSocketPath(cb) {
+  if(this.socketPath) {
+    return cb(null, this.socketPath);
+  }
+  var self = this;
   this.execFile('i3', ['--get-socketpath'], function(err, out) {
     if(err) {
       return cb(err);
     }
-    this.socketPath = out.toString().trim();
-    return cb(null, this.socketPath);
+    self.socketPath = out.toString().trim();
+    return cb(null, self.socketPath);
   });
 };
 
