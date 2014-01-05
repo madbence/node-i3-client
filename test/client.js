@@ -47,5 +47,11 @@ describe('Client', function() {
         path.should.equal('abc');
       });
     });
+    it('should not call exec twice', function() {
+      client.getSocketPath(function() {});
+      client.getSocketPath(function() {
+        client.execFile.calledTimes.should.equal(1);
+      });
+    });
   });
 });
