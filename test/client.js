@@ -26,5 +26,14 @@ describe('Client', function() {
         client.execFile.called.should.be.true;
       });
     });
+    it('should execute `i3 --get-socketpath`', function() {
+      execFile = function(cmd, args, cb) {
+        cmd.should.equal('i3');
+        args.should.be.an.Array;
+        args[0].should.equal('--get-socketpath');
+        cb(null, '');
+      };
+      client.getSocketPath(function() {});
+    });
   });
 });
