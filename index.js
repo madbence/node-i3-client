@@ -10,6 +10,9 @@ function Client(opts) {
 
 Client.prototype.getSocketPath = function getSocketPath(cb) {
   this.execFile('i3', ['--get-socketpath'], function(err, out) {
+    if(err) {
+      return cb(err);
+    }
     return cb(null, this.socketPath);
   });
 };
